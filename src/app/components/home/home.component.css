@@ -1,9 +1,8 @@
 main {
   max-width: 100rem;
   margin: 0 auto;
-}
-
-h2 {
+  display: flex;
+  flex-direction: column;
   font-size: 2.4rem;
 }
 
@@ -38,6 +37,12 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: inset #0c0b0b78 -2px -2px 0px;
+  transition: all .2s ease-in-out;
+}
+
+.search button:active {
+  box-shadow: #ffffff57 2px 1px 3px;
 }
 
 .search button img {
@@ -85,4 +90,48 @@ ul img {
   li p {
     font-size: 2.4rem;
   }
+}
+
+.spinner {
+  width: 50px;
+  padding: 8px;
+  margin: 100px auto;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #25b09b;
+  --_m: 
+    conic-gradient(#0000 10%,#000),
+    linear-gradient(#000 0 0) content-box;
+  -webkit-mask: var(--_m);
+          mask: var(--_m);
+  -webkit-mask-composite: source-out;
+          mask-composite: subtract;
+  animation: s3 1s infinite linear;
+}
+
+@keyframes s3 {to{transform: rotate(1turn)}}
+
+.pagination {
+  margin: 0 auto;
+  padding: 5rem;
+  display: inline-flex;
+  gap: 1rem;
+}
+
+.pagination button {
+  width: 50px;
+  height: 40px;
+  background: #cc005f;
+  border-radius: 11px;
+  color: #fff;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+  border: none;
+  font-size: 2.5rem;
+  box-shadow: inset #0c0b0b78 -2px -2px 0px;
+  transition: all .2s ease-in-out;
+}
+
+.pagination button:active {
+  box-shadow: #ffffff57 2px 1px 3px;
 }

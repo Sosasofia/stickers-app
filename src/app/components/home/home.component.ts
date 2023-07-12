@@ -8,7 +8,11 @@ import { StickersService } from "../../services/stickers.service";
 })
 export class HomeComponent implements OnInit {
   stickers: any = [];
+  limit = 40;
+  offset = 0;
+  page = 1;
   initializeSearch = "messi";
+  loading = true;
 
   constructor(private stickersService: StickersService) {}
 
@@ -17,14 +21,35 @@ export class HomeComponent implements OnInit {
   }
 
   performSearch(searchTerm: HTMLInputElement): void {
-    this.stickersService.getData(searchTerm.value).subscribe((res) => {
-      this.stickers = res;
-    });
+    this.loading = true;
+    this.stickersService
+      .getStickers(searchTerm.value, this.limit, this.offset)
+      .subscribe((res) => {
+        this.stickers = res;
+        this.loading = false;
+      });
   }
 
-  getData(searchTerm = this.initializeSearch) {
-    this.stickersService.getData(searchTerm).subscribe((res) => {
-      this.stickers = res;
-    });
+  getData() {
+    this.stickersService
+      .getStickers(this.initializeSearch, this.limit, this.offset)
+      .subscribe((res) => {
+        this.stickers = res;
+        this.loading = false;
+      });
+  }
+
+  changeToNextPage() {
+    this.loading = true;
+    this.offset = this.page * this.limit;
+    this.page++;
+    this.getData();
+  }
+
+  changeToPreviousPage() {
+    this.loading = true;
+    this.offset -= this.limit;
+    this.page--;
+    this.getData();
   }
 }

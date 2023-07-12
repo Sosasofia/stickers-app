@@ -16,4 +16,14 @@ export class StickersService {
       params: { q: searchTerm }
     });
   }
+
+  public getStickers(
+    searchTerm: string,
+    limit: number,
+    offset: number
+  ): Observable<any> {
+    return this.http.get<any>(this.configUrl, {
+      params: { q: searchTerm, limit, offset }
+    });
+  }
 }
